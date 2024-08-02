@@ -458,6 +458,7 @@ def invoice_pdf(invoice_number):
     response.headers['Content-Disposition'] = f'inline; filename=invoice_{invoice_number}.pdf'
 
     return response
+
 # Addtional options are under development
 # Route to credit note
 @app.route('/invoices/create_credit_note/<int:invoice_number>', methods=['GET', 'POST'])
