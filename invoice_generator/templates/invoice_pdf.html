@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture N° {{ invoice.invoice_number }}</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and page setup */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 1px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        /* Red border for client details and facture class */
+        .red-border {
+            border-top: 10px solid red;
+            padding-top: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        /* Flex container for facture and client details */
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        /* Client details and facture details styles */
+        .details {
+            flex: 1;
+            margin-right: 10px; /* Adjusted margin */
+        }
+        .details h5 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .details p {
+            margin: 5px 0;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Facture class styles */
+        .facture-class {
+            flex: 0 0 200px; /* Fixed width for facture class */
+        }
+        .facture-class h5 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: none; /* Remove all borders */
+            padding: 8px; /* Adjust padding as needed */
+            text-align: left;
+            font-size: 12px; /* Font size adjustment */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .text-right {
+            text-align: right;
+        }
+
+        /* Empty class for spacing */
+        .empty-class {
+            width: 200px; /* Adjust width as needed */
+        }
+
+        /* Footer styles */
+        .footer {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .footer p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FACTURE</h1>
+        </div>
+        <div class="red-border"></div>
+        <div class="flex-container">
+            <div class="details client-details">
+                <h5>Client: {{ client.name }}</h5>
+                <p>Adresse: {{ client.address }}</p>
+                <p>Téléphone: {{ client.phone_number }}</p>
+                <p>Email: {{ client.email }}</p>
+                <p>Matricule fiscale: {{ client.tax_registration_number }}</p>
+            </div>
+            <div class="details facture-class">
+                <h5>Numéro de facture : {{ invoice.invoice_number }}</h5>
+                <p>Date de facture : {{ invoice.invoice_date }}</p>
+                <p>Date de livraison : {{ invoice.delivery_date }}</p>
+                <p>Date de retour : {{ invoice.return_date }}</p>
+                <p>Échéance de paiement : {{ invoice.payment_due_date }}</p>
+                <p>Mode de paiement : {{ invoice.payment_method }}</p>
+                <p>N° contrat de location : {{ invoice.rental_contract_number }}</p>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Prix unitaire HT</th>
+                    <th class="text-right">Prix total HT</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in invoice_articles %}
+                <tr>
+                    <td>{{ article.article_name }}</td>
+                    <td>{{ article.quantity }}</td>
+                    <td>{{ '%.3f' % article.unit_price }}</td>
+                    <td class="text-right">{{ '%.3f' % article.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <table>
+            <tr>
+                <th class="empty-class"></th>
+                <th class="text-right">REMISE:</th>
+                <td>{{ '%.3f' % discount_amount }}</td>
+            </tr>
+            <tr>
+                <th class="empty-class"></th>
+                <th class="text-right">SOUS-TOTAL MOINS LES REMISES:</th>
+                <td>{{ '%.3f' % total_price }}</td>
+            </tr>
+            <tr>
+                <th class="empty-class"></th>
+                <th class="text-right">TVA (19%):</th>
+                <td>{{ '%.3f' % tva }}</td>
+            </tr>
+            <tr>
+                <th class="empty-class"></th>
+                <th class="text-right">TIMBRE FISCALE:</th>
+                <td>1.0</td>
+            </tr>
+            <tr>
+                <th class="empty-class"></th>
+                <th class="text-right">TOTAL TTC:</th>
+                <td>{{ '%.3f' % total_with_tva }}</td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <p>SOMME FINALE A PAYER: TND {{ total_with_tva }}</p>
+        </div>
+    </div>
+</body>
+</html>

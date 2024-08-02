@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Credit Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Credit Notes</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Credit Note ID</th>
+                <th>Invoice Number</th>
+                <th>Client Name</th>
+                <th>Credit Date</th>
+                <th>Amount</th>
+                <th>Reason</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for credit_note in credit_notes %}
+            <tr>
+                <td>{{ credit_note['Credit Note ID'] }}</td>
+                <td>{{ credit_note['Invoice Number'] }}</td>
+                <td>{{ credit_note['Client Name'] }}</td>
+                <td>{{ credit_note['Credit Date'] }}</td>
+                <td>{{ credit_note['Amount'] }}</td>
+                <td>{{ credit_note['Reason'] }}</td>
+                <td><a href="{{ url_for('credit_note_pdf', credit_note_id=credit_note['Credit Note ID']) }}">View PDF</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

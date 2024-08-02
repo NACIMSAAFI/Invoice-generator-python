@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Note</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .credit-note {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .credit-note h2 {
+            margin-top: 0;
+        }
+        .credit-note p {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Credit Note</h1>
+        </div>
+        <div class="credit-note">
+            <h2>Client Information</h2>
+            <p><strong>Client Name:</strong> {{ data.client_name }}</p>
+            <h2>Credit Note Details</h2>
+            <p><strong>Invoice Number:</strong> {{ data.invoice_number }}</p>
+            <p><strong>Credit Note Number:</strong> {{ data.credit_note_number }}</p>
+            <p><strong>Reason:</strong> {{ data.reason }}</p>
+            <p><strong>Amount:</strong> {{ data.amount }}</p>
+        </div>
+    </div>
+</body>
+</html>

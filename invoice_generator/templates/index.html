@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <style>
+        /* Reset default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Set background color and font */
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Full-width container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Title styling */
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Options and links section */
+        .options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Links styling */
+        .links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Links within links section */
+        .links a {
+            font-size: 1.2rem;
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover effect for links */
+        .links a:hover {
+            color: #0056b3;
+        }
+
+        /* Logout section */
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: right;
+        }
+
+        /* Logout button styling */
+        .logout button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for logout button */
+        .logout button[type="submit"]:hover {
+            background-color: #c82333;
+        }
+
+        /* Log of disconnection */
+        .log {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+    </style>
+    <!-- Include Google Fonts -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Invoice Generator</h1>
+        <div class="options">
+            <a href="{{ url_for('new_client') }}" style="background-color: #007bff; color: #ffffff; border-radius: 4px; padding: 10px 20px; text-decoration: none;">New Client</a>
+            <a href="{{ url_for('new_article') }}" style="background-color: #007bff; color: #ffffff; border-radius: 4px; padding: 10px 20px; text-decoration: none;">New Article</a>
+            <a href="{{ url_for('new_invoice') }}" style="background-color: #007bff; color: #ffffff; border-radius: 4px; padding: 10px 20px; text-decoration: none;">New Invoice</a>
+        </div>
+        <div class="links">
+            <a href="{{ url_for('all_clients') }}">All Clients</a>
+            <a href="{{ url_for('all_articles') }}">All Articles</a>
+            <a href="{{ url_for('all_invoices') }}">All Invoices</a>
+        </div>
+    </div>
+
+    <!-- Logout Form -->
+    <div class="logout">
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+        <div class="log">
+
+        </div>
+    </div>
+</body>
+
+</html>
